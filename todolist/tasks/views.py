@@ -15,10 +15,11 @@ def onetask(request, pk):
 
 
 def index(request, pk=None, status=None):
-    tasks = Task.objects.all()  # Récupère toutes les tâches depuis la base de données
-    if request.method == 'GET':
+    if pk is not None: # verifi si l'id est founit dans l'url
         task = Task.objects.filter(id=pk)
         task.update(status=status)
+        return redirect('index')  # Redirige vers la même vue pour rafraîchir la liste des tâches
+    tasks = Task.objects.all()
     return render(request, 'tasks/index.html', {'tasks': tasks})
 
 
