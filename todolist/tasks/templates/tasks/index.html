@@ -19,7 +19,7 @@
             <ul>
                 {% for task in tasks %}
                     <li>
-                        <input type="checkbox" hx-get="tasks/{{ task.id }}/{% if task.status %}0{% else %}1 {%endif%}"> <!-- La case à cocher est cochée si la tâche est terminée  /{{ task.status  }}-->
+                        <input type="checkbox" hx-get="{% url 'update_task_status' task.id 1 if not task.status else 0 %}" hx-trigger="change"> <!-- La case à cocher est cochée si la tâche est terminée  /{{ task.status  }}-->
                         <a href="{% url 'detail' task.pk %}"><strong>{{ task.title }}</strong></a><br>
                         Description: {{ task.description }} <br>
                         Status: {{task.status}}
@@ -27,8 +27,7 @@
                 {% endfor %}
             </ul>
         </div>
-
-        <div class="column">
+          <div class="column">
             <h2>Tâches en cours</h2>
             <ul>
                 {% for task in tasks %}
