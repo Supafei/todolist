@@ -12,7 +12,6 @@ from tasks.serializers import TaskSerializer
 def onetask(request, pk):
         task = get_object_or_404(Task, pk=pk)
         return render(request, 'tasks/detail.html', {'task': task})
-# FONCTIONNELLE !
 
 
 def index(request, pk=None, status=None):
@@ -22,6 +21,8 @@ def index(request, pk=None, status=None):
         return redirect('index')  # Redirige vers la même vue pour rafraîchir la liste des tâches
     tasks = Task.objects.all()
     return render(request, 'tasks/index.html', {'tasks': tasks})
+
+
 
 @csrf_exempt
 def task_list(request):
