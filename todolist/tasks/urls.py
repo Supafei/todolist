@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name="index"),
     path('tasks/<int:pk>/<int:status>/', views.index, name="index"),
+    path('tasks/<int:pk>/<int:status>/', index, name='update_task_status'),
 
     path('tasks/<int:pk>/', views.onetask, name="detail"),
 ]
