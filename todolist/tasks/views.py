@@ -1,10 +1,24 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
+from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from tasks.models import Task
 from tasks.serializers import TaskSerializer
 # Create your views here.
+
+
+# on va créer une vue simple
+def onetask(request, pk):
+        task = get_object_or_404(Task, pk=pk)
+        return render(request, 'tasks/detail.html', {'task': task})
+# FONCTIONNELLE !
+def index(request, pk=None, status=None):
+    tasks = Task.objects.all()  # Récupère toutes les tâches depuis la base de données
+    if request.method == 'GET':
+        task = Task.objects.filter(id=pk)
+        task.update(status=status)
+    return render(request, 'tasks/index.html', {'tasks': tasks})
 
 @csrf_exempt
 def task_list(request):

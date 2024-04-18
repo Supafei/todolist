@@ -1,0 +1,10 @@
+.column-container {
+    display: flex; /* Utilisation de flexbox pour créer une mise en page flexible */
+}
+
+.column {
+    flex: 1; /* Les colonnes ont la même taille */
+    padding: 10px;
+    margin: 10px; /* Ajout de marges entre les colonnes */
+    border: 1px solid #ccc; /* Ajout d'une bordure pour visualiser les colonnes */
+}
