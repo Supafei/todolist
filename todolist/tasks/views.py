@@ -12,13 +12,16 @@ from tasks.serializers import TaskSerializer
 def onetask(request, pk):
         task = get_object_or_404(Task, pk=pk)
         return render(request, 'tasks/detail.html', {'task': task})
-# FONCTIONNELLE !
+
+
 def index(request, pk=None, status=None):
     tasks = Task.objects.all()  # Récupère toutes les tâches depuis la base de données
     if request.method == 'GET':
         task = Task.objects.filter(id=pk)
         task.update(status=status)
     return render(request, 'tasks/index.html', {'tasks': tasks})
+
+
 
 @csrf_exempt
 def task_list(request):
